@@ -30,13 +30,17 @@ const Dock = () => {
       });
     };
     const handleMouseMove = (e) => {
-        const { left } = dock.getBoundingClientRect();
-        animateIcon(e.clientX - left);
-
+      const { left } = dock.getBoundingClientRect();
+      animateIcon(e.clientX - left);
     };
     const handleMouseLeave = () => {
       icons.forEach((element) => {
-        gsap.to(element, { scale: 1, y: 0, duration: 0.25, ease: "power1.out" });
+        gsap.to(element, {
+          scale: 1,
+          y: 0,
+          duration: 0.25,
+          ease: "power1.out",
+        });
       });
     };
 
