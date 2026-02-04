@@ -3,9 +3,11 @@ import { useGSAP } from "@gsap/react";
 import React, { useRef } from "react";
 import { Tooltip } from "react-tooltip";
 import { gsap } from "gsap";
+import useWindowStore from "#store/window.js";
 
 const Dock = () => {
   const dockRef = useRef(null);
+  const { openWindow, closeWindow,windows } = useWindowStore();
 
   useGSAP(() => {
     const dock = dockRef.current;
@@ -53,7 +55,18 @@ const Dock = () => {
     };
   }, []);
 
-  const toggleApp = (app) => {};
+  const toggleApp = (app) => {
+    if(!app.canOpen) return;
+
+    const win=windows[app.id];
+
+    if (win.isOpen) {
+        closeWindow(app.id);
+  } else {
+        openWindow(app.id)}
+
+        console.log(windows);
+  };
 
   return (
     <section id="dock">
